@@ -8,7 +8,24 @@
     <title>Cameron Pittman: Portfolio</title>
 
     <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
+    <!-- Used  https://jonassebastianohlsson.com/criticalpathcssgenerator/ to identify critical css -->
     <style> body {color: #202020;} </style>
+
+    <!-- <link async href="css/style.css" rel="stylesheet"> -->
+    <link async href="css/print.css" rel="stylesheet" media="print">
+
+   <!--  Removed render blocking css by plundering the following javascript from Google Developers https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery -->
+    <script>
+      var cb = function() {
+        var l = document.createElement('link'); l.rel = 'stylesheet';
+        l.href = 'css/style.css';
+        var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(cb);
+      else window.addEventListener('load', cb);
+    </script>
 
     <script>
       (function(w,g){w['GoogleAnalyticsObject']=g;
@@ -66,8 +83,6 @@
       <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
     </footer>
 
-    <link async href="css/style.css" rel="stylesheet">
-    <link async href="css/print.css" rel="stylesheet" media>
 
   </body>
 </html>
