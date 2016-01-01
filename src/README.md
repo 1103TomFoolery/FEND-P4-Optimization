@@ -63,3 +63,40 @@ Feeling uninspired by the portfolio? Here's a list of cool portfolios I found af
 * <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
 * <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
 * <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+
+
+### Updates (Tom Allen)
+
+
+In this project we were given a site to optimize with the following goals:
+
+1)  Score above 90 for both Desktop and Mobile on Pagespeed Insights
+2)  When scrolling pizza.html maintain 60 fps
+
+Here are the optimizations I made.
+
+To get the target page load speeds:
+
+1)  Removed external link to Google Fonts and put the font definitions into style.css
+2)  Added the media query to print.css
+3)  Made the calls to the two js files async.
+4)  Minified all html, css and js files
+5)  Compressed images and pngs
+6)  I used https://jonassebastianohlsson.com/criticalpathcssgenerator/ to identify "above the fold" css and implemented javascript borrowed with great appreciation from https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery to unblock rendering.
+
+This resulted in PageSpeed Insight scores of Mobile 94 and Desktop 90.
+
+I experimented with the javascript script runner Grunt to automate various repetitive optimization steps.  My script uses the following plugins:
+
+1)  grunt-contrib-imagemin to minimize images (command line parameter = images)
+2)  grunt-contrib-cssmin to minimize css files (command line parameter = css)
+3)  grunt-contrib-htmlmin to minimize html files (command line parameter = htmL)
+4)  grunt-contrib-uglify to minimize javascript files (command line parameter = js)
+
+Each of the plugins can be run separately by entering the associated command line parameter.  For example; grunt js will run the uglify plugin.  
+Alternatively, all four will run by default if you simply enter grunt on the command line.
+
+All source files are under the src/ folder and the optimized files are saved in their respective dist/ folder.  There are two things to note.  First, minified css files are saved with the extension .min.css however index.html isn't smart enough to know to use them so I manually renamed them to .css.  More importantly, imagemin didn't optimize the images enough, even with optimization level set to 7, so I had to do an additional manual step using Shrink O'matic to compress the pisseria.jpg further.
+
+To get the 60 fps performance I just watched the office hours video for that topic.  With those clues I optimized the updatePositions() function by moving the calculation for the relative position out of the for-loop and reduced the number of generated pizzas from 200 to 50.  
+
