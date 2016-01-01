@@ -98,5 +98,11 @@ Alternatively, all four will run by default if you simply enter grunt on the com
 
 All source files are under the src/ folder and the optimized files are saved in their respective dist/ folder.  There are two things to note.  First, minified css files are saved with the extension .min.css however index.html isn't smart enough to know to use them so I manually renamed them to .css.  More importantly, imagemin didn't optimize the images enough, even with optimization level set to 7, so I had to do an additional manual step using Shrink O'matic to compress the pisseria.jpg further.
 
-To get the 60 fps performance I just watched the office hours video for that topic.  With those clues I optimized the updatePositions() function by moving the calculation for the relative position out of the for-loop and reduced the number of generated pizzas from 200 to 50.  
+To get the 60 fps performance I just watched the office hours video for that topic.  With those clues I optimized the updatePositions() function by moving the calculation for the relative position out of the for-loop and reduced the number of generated pizzas from 200 to 50.  After submitting for code review I made additional changes (thanks to Jose for stellar recommendations):
 
+1)  Moved variable declarations out of the loops in main.js
+	lines: 453, 454, 455, 456, 478, 538, and 539
+2)  changed document.querySelectorAll to document.getElementsByClassName
+    lines: 453 and 512
+3)  changed document.querySelectorAll to document.getElementsByID
+	line: 478
